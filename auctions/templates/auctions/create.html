@@ -1,0 +1,53 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Create Listening</h2>
+    <div id="formulario">
+        <form method = "post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- Name -->
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+
+            <!-- Description -->
+            <label class="form-label">Description</label>
+            <div class="form-floating">
+                <textarea class="form-control" name="description" id="description"></textarea>
+            </div>
+
+            <!-- File -->
+            <div class="mb-3">
+                <label for="formFile" style="margin-top: 20px;" class="form-label">Image of your product</label>
+                <input class="form-control" type="file" id="image" name="image">
+            </div>
+
+            <!-- Minimal price -->
+            <div class="input-group mb-3" style="display: flex; flex-direction: column;">
+                <label for="minimal_bid" style="margin-top: 20px;" class="form-label">Minimal Bid</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">$</span>
+                    <input id="minimal_bid" name="price" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                    <span class="input-group-text">0.00</span>
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="mb-3">
+                <label class="form-label" for="category">Category</label>
+                <select id="category" name="category" class="form-select" aria-label="Default select example">
+                    <option selected value="0">None</option>
+                    {% for i in categories %}
+                        <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="d-grid gap-2 col-6 mx-auto" style="margin-bottom: 50px;">
+                <button class="btn btn-primary" type="submit">Button</button>
+            </div>
+            
+        </form>
+    </div>
+{% endblock %}

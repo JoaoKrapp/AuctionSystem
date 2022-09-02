@@ -1,0 +1,72 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <div style="display: flex; justify-content: space-between;">
+        <h2>Listening: {{auction.name}}</h2>
+        <form action="{% url 'watchlist' auction.id %}" method="post">
+            {% csrf_token %}
+            {% if watchlist %}
+                <button type="submit" style="align-self: center;" class="btn btn-outline-danger">Remove from Watchlist</button>
+            {% else %}
+                <button type="submit" style="align-self: center;" class="btn btn-outline-primary">Add to Watchlist</button>
+            {% endif %}
+        </form>
+    </div>
+
+    <div class="card mb-3">
+        <div style="display: flex; justify-content: center;" >
+            <img src="{{ auction.image }}" style="width:auto; height:100%; max-height:350px"  class="card-img-top" alt="{{ i.name }}">
+            
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{ auction.description }}</p>
+          <h3>Price: ${{ auction.price }}</h3>
+        </div>
+    </div>
+
+    <form method="post" action="{% url 'find' auction.id %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <p style="margin-bottom: 0px;">{{ auction.n_bids }} bid(s) so far.
+            {% if was_your_bid_the_last_bid %}
+                Your bid is the current bid.
+            {% endif %}
+            </p>
+            <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                <input type="number" name="bid" class="form-control">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Place Bid</button>
+    </form>
+
+    <div>
+        <h2>Details</h2>
+        <ul> 
+            <li>Listed by: {{ auction.user }}</li> 
+            <li>Category: {{ auction.category }}</li> 
+        </ul>
+    </div>
+
+    <hr>
+
+    <div>
+        <h2>Comments</h2>
+        <form action="{% url 'addcomment' auction.id %}" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <textarea name="comment" class="form-control mb-2" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+        </form>
+        {% for comment in comments%}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h6>@{{comment.user}}</h6>
+                    {{ comment.comment }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

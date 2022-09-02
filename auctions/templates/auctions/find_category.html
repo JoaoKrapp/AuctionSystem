@@ -1,0 +1,22 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+    <div class="mainpage">
+        <div class="items">
+            {% for i in auctions %}
+                <div class="card cardcustom" style="width: 18rem;">
+                    <img src="{{ i.image }}" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ i.name }}</h5>
+                        <h4 class="card-title">Price: ${{ i.price }}</h5>
+                        <p class="card-text">{{ i.description }}</p>
+                        <a href="{% url 'find' i.id %}" class="btn btn-primary">Go to auction</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+{% endblock %}

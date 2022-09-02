@@ -1,0 +1,46 @@
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+body {
+    padding: 10px;
+}
+
+.mainpage{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.items{
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+
+.cardcustom{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin: 10px 30px;
+}
+
+.card-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+#description{
+    height: 200px;
+}
+
+#place_bet{
+    display: flex;
+    
+}

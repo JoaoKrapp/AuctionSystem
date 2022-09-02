@@ -1,0 +1,21 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <h2>Category</h2>
+    <table class="table">
+        <thead>
+            <th scope="col">Category</th>
+            <th scope="col">Find</th>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+                <tr>
+                    <th>{{ category.name }}</th>
+                    <td><a href="{% url 'find_category' category.pk %}"><span class="material-symbols-outlined">search</span></a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
